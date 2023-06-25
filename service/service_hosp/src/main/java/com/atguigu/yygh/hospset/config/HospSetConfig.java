@@ -1,4 +1,4 @@
-package com.atguigu.yygh.hosp.config;
+package com.atguigu.yygh.hospset.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.atguigu.yygh.hosp.mapper")
+@MapperScan("com.atguigu.yygh.hospset.mapper")
 public class HospSetConfig {
 }
 

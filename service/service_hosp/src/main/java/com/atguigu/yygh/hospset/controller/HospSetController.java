@@ -1,13 +1,15 @@
-package com.atguigu.yygh.hosp.controller;
+package com.atguigu.yygh.hospset.controller;
 
-import com.atguigu.yygh.hosp.service.HospSetService;
+import com.atguigu.yygh.hospset.service.HospSetService;
 import com.atguigu.yygh.model.hosp.HospitalSet;
+
+
+import com.atguigu.yygh.commons.result.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @author Wldz
@@ -21,10 +23,19 @@ public class HospSetController {
     @Autowired
     private HospSetService hospSetService;
 
-    @GetMapping({"id"})
-    public HospitalSet findById(Serializable id){
+    @GetMapping("{id}")
+    public HospitalSet findById(@PathVariable Serializable id){
         HospitalSet hospitalSet = hospSetService.getById(id);
         return hospitalSet;
+    }
+
+    @DeleteMapping("{id}")
+    public R deleteById(@PathVariable Serializable id){
+        boolean isDeleted = hospSetService.removeById(id);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("info:id",id);
+        map.put("info:method","delete");
+        return isDeleted?R.ok().message("删除成功").data(map):R.err().message("删除失败").data(map);
     }
 
 }
