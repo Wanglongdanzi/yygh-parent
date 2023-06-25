@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Wldz
@@ -17,6 +18,7 @@ import java.util.HashMap;
  * @description TODO
  * @date 23-6-25 19:25
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/hospSet")
 public class HospSetController {
@@ -27,6 +29,12 @@ public class HospSetController {
     public HospitalSet findById(@PathVariable Serializable id){
         HospitalSet hospitalSet = hospSetService.getById(id);
         return hospitalSet;
+    }
+
+    @GetMapping
+    public List<HospitalSet> findAll(){
+        List<HospitalSet> hospitalSets = hospSetService.list();
+        return hospitalSets;
     }
 
     @DeleteMapping("{id}")
