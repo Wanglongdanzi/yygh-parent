@@ -3,8 +3,6 @@ package com.atguigu.yygh.hospset.controller;
 import com.atguigu.yygh.commons.exchandler.exc.NullValueException;
 import com.atguigu.yygh.hospset.service.HospSetService;
 import com.atguigu.yygh.model.hosp.HospitalSet;
-
-
 import com.atguigu.yygh.commons.result.R;
 import com.atguigu.yygh.vo.hosp.HospitalSetQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -15,10 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -122,8 +116,6 @@ public class HospSetController {
         return deleted?R.suc().message("批量删除成功"):R.fail().message("批量删除失败");
     }
 
-
-
     /**
      * @description: 新增医院设置
      * @author: Wldz
@@ -165,6 +157,11 @@ public class HospSetController {
     @PutMapping("lock/{id}/{status}")
     public R lockById(@ApiParam(name = "id",value = "医院设置对象ID",required = true)@PathVariable Long id,
                       @ApiParam(name = "status",value = "状态status",required = true)@PathVariable Integer status){
+
+        HospitalSet hospitalSet = hospSetService.getById(id);
+        if(hospitalSet==null){
+            return R.fail().message("无效医院设置ID");
+        }
         if(status!=0&&status!=1){
             return R.exc_err().message("医院设置状态值不合法(0,1)");
         }
@@ -172,11 +169,6 @@ public class HospSetController {
         if(originStatus.equals(status)){
             return R.fail().message("请勿重复操作");
         }
-        HospitalSet hospitalSet = hospSetService.getById(id);
-        if(hospitalSet==null){
-            return R.fail().message("无效医院设置ID");
-        }
-
         hospitalSet.setStatus(status);
         //hospitalSet.setUpdateTime(new Date());
 
