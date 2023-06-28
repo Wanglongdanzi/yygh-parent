@@ -55,11 +55,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R handler(NullValueException e){
         e.printStackTrace();
-        log.debug("测试DEBUG级别日志输出");
-        log.info("测试INFO级别日志输出");
-        log.warn("测试WARN级别日志输出");
-        log.error("测试ERROR级别日志输出");
-        log.error(e.getMsg());
+        log.error("出现自定义空值异常"+e.getMsg());
         return R.exc_err().message(e.getMsg()).code(e.getCode());
     }
 }
