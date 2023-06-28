@@ -62,7 +62,7 @@ public class HospSetController {
      * @return: com.atguigu.yygh.commons.result.R
      **/
     @ApiOperation("医院设置分页查询接口")
-    @GetMapping("page/{pageNum}/{pageSize}")
+    @PostMapping("page/{pageNum}/{pageSize}")
     public R findPage(@ApiParam(name = "pageNum",value = "分页参数(当前页码)",required = true) @PathVariable Integer pageNum,
                       @ApiParam(name = "pageSize",value = "分页参数(页尺寸)",required = true) @PathVariable Integer pageSize,
                       @ApiParam(name = "hospitalSetQueryVo",value = "查询条件",required = true) @RequestBody HospitalSetQueryVo hospitalSetQueryVo){
