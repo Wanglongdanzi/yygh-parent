@@ -25,7 +25,7 @@ public class R {
     @ApiModelProperty(name = "message",value = "返回结果描述信息")
     private String message;
     @ApiModelProperty(name = "data",value = "返回结果数据信息")
-    private Map<String, Object> data;
+    private Map<String, Object> data = new HashMap<>();
 
     //构造私有化
     private R(){}
@@ -70,14 +70,15 @@ public class R {
     }
 
     public R data(Map<String,Object> map){
-        this.setData(map);
+        for (String key : map.keySet()) {
+            this.data.put(key,map.get(key));
+        }
         return this;
     }
 
     public R data(String str, Object obj) {
-        Map<String, Object> map = new HashMap<>();
-        map.put(str, obj);
-        return data(map);
+        this.data.put(str,obj);
+        return this;
     }
 }
 

@@ -24,7 +24,7 @@ import java.util.List;
 @Api("医院设置接口")
 @CrossOrigin
 @RestController
-@RequestMapping("/admin/hospSet")
+@RequestMapping("/admin/hosp/hospSet")
 public class HospSetController {
     @Autowired
     private HospSetService hospSetService;
